@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Update Post</title>
+        <link rel="stylesheet"
+            href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css'
+            rel='stylesheet'>
+        <style>
+            .form-group {
+                margin-bottom: 1.5rem;
+            }
+    
+            .img-thumbnail {
+                max-width: 100px;
+                margin-right: 1rem;
+            }
+    
+            .btn-primary {
+                margin-top: 1rem;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container my-5">
+            <h3><a href="/post"><i class='bx bx-arrow-back'></i></a>Quay về</h3>
+            <h1>Update Post</h1>
+            <form action="/update_post/<%= postToUpdate._id %>" method="POST">
+                <div class="form-group">
+                    <label for="userName">User</label>
+                    <select class="form-control" id="userName" name="userName">
+                        <% users.forEach(user => { %>
+                        <option value="<%= user._id %>"
+                            <%=postToUpdate.user.toString() ===
+                            user._id.toString() ? 'selected' : '' %>><%=
+                            user.name %></option>
+                        <% }) %>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="namePost">Post Name</label>
+                    <input type="text" class="form-control" id="namePost"
+                        name="namePost" value="<%= postToUpdate.namePost %>"
+                        required>
+                </div>
+                <div class="form-group">
+                    <label for="content">Content</label>
+                    <textarea class="form-control" id="content" name="content"
+                        rows="5" required><%= postToUpdate.content %></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="imgs">Image URL</label>
+                    <div class="d-flex align-items-center">
+                        <% if (postToUpdate && postToUpdate.imgs) { %>
+                        <img src="../assets/<%= postToUpdate.imgs %>"
+                            alt="<%= postToUpdate.imgs %>"
+                            class="img-thumbnail mr-3"
+                            style="max-width: 100px;">
+                        <% } %>
+                        <input type="file" class="form-control" id="imgs"
+                            name="imgs">
+                        <% if (postToUpdate && postToUpdate.imgs) { %>
+                        <input type="hidden" name="oldImgs"
+                            value="<%= postToUpdate.imgs %>">
+                        <% } %>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Update
+                    Post</button>
+            </form>
+        </div>
+    </body>
+    <script>
+        function validateForm() {
+            let namePost = document.getElementById("namePost").value.trim();
+            let content = document.getElementById("content").value.trim();
+            let imgs = document.getElementById("imgs").value;
+
+            if (namePost === "") {
+                alert("Vui lòng nhập tên bài viết.");
+                return false;
+            }
+
+            if (content === "") {
+                alert("Vui lòng nhập nội dung bài viết.");
+                return false;
+            }
+
+            if (imgs === "" && (!postToUpdate || !postToUpdate.imgs)) {
+                alert("Vui lòng chọn ảnh.");
+                return false;
+            }
+
+            return true;
+        }
+    </script>
+</html>

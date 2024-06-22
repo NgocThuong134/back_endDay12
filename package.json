@@ -1,0 +1,25 @@
+{
+  "name": "day-04-02",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "nodemon ./bin/www",
+    "dev": "cross-env ENV=dev nodemon ./bin/www",
+    "qc": "cross-env ENV=qc nodemon ./bin/www",
+    "prod": "cross-env ENV=prod nodemon ./bin/www"
+  },
+  "dependencies": {
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "dotenv": "^16.4.5",
+    "ejs": "^3.1.10",
+    "express": "^4.19.2",
+    "http-errors": "~1.6.3",
+    "mongoose": "^5.13.22",
+    "morgan": "~1.9.1",
+    "nodemon": "^3.1.0"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3"
+  }
+}

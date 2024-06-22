@@ -1,0 +1,140 @@
+<head>
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css'
+    rel='stylesheet'>
+</head>
+<style>
+/* General Styles */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 20px;
+}
+
+h3 {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+h3 a {
+  color: #333;
+  text-decoration: none;
+  margin-right: 10px;
+}
+
+h3 i {
+  font-size: 20px;
+}
+
+/* Form Styles */
+form {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+form label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+form input,
+form select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  margin-bottom: 15px;
+}
+
+form button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+form button:hover {
+  background-color: #45a049;
+}
+
+/* Validation Styles */
+input:invalid,
+select:invalid {
+  border-color: #dc3545;
+}
+
+input:valid,
+select:valid {
+  border-color: #28a745;
+}
+</style>
+<body>
+  <h3><a href="/"><i class='bx bx-arrow-back'></i></a>Quay về</h3>
+
+  <form action="/add_user" method="post" onsubmit="return validateForm()">
+    Tên: <input type="text" name="name" required maxlength="50"> <br>
+    Giới tính:
+    <select name="gender" required>
+      <option value>Chọn giới tính</option>
+      <option value="Nam">Nam</option>
+      <option value="Nữ">Nữ</option>
+    </select> <br>
+    Tuổi: <input type="number" name="age" required min="18" max="100"> <br>
+    Email: <input type="email" name="email" required> <br>
+    Số điện thoại: <input type="tel" name="phone" required
+      pattern="[0-9]{10,11}"> <br>
+    Mật khẩu: <input type="password" name="password" required minlength="8"
+      maxlength="20"> <br>
+    Địa chỉ: <input type="text" name="address" required maxlength="200"> <br>
+    <button type="submit">Thêm</button>
+  </form>
+
+  <script>
+    function validateForm() {
+      var name = document.getElementsByName("name")[0].value;
+      var gender = document.getElementsByName("gender")[0].value;
+      var age = document.getElementsByName("age")[0].value;
+      var email = document.getElementsByName("email")[0].value;
+      var phone = document.getElementsByName("phone")[0].value;
+      var password = document.getElementsByName("password")[0].value;
+      var address = document.getElementsByName("address")[0].value;
+
+      if (name.trim() === "" || gender.trim() === "" || age.trim() === "" || email.trim() === "" || phone.trim() === "" || password.trim() === "" || address.trim() === "") {
+        alert("Vui lòng điền đầy đủ thông tin.");
+        return false;
+      }
+
+      if (!/^[a-zA-Z\s]+$/.test(name)) {
+        alert("Tên chỉ được chứa chữ cái và khoảng trắng.");
+        return false;
+      }
+
+      if (isNaN(age) || age < 18 || age > 100) {
+        alert("Tuổi phải là một số từ 18 đến 100.");
+        return false;
+      }
+
+      if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email)) {
+        alert("Email không hợp lệ.");
+        return false;
+      }
+
+      if (!/^[0-9]{10,11}$/.test(phone)) {
+        alert("Số điện thoại phải có 10 hoặc 11 chữ số.");
+        return false;
+      }
+
+      if (password.length < 8 || password.length > 20) {
+        alert("Mật khẩu phải có từ 8 đến 20 ký tự.");
+        return false;
+      }
+
+      return true;
+    }
+  </script>
+</body>

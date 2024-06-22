@@ -1,0 +1,90 @@
+<head>
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css'
+    rel='stylesheet'>
+  <style>
+      /* General Styles */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 20px;
+}
+
+h3 {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+h3 a {
+  color: #333;
+  text-decoration: none;
+  margin-right: 10px;
+}
+
+h3 i {
+  font-size: 20px;
+}
+
+/* Form Styles */
+form {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+form label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+form input,
+form select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  margin-bottom: 15px;
+}
+
+form button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+form button:hover {
+  background-color: #45a049;
+}
+    </style>
+</head>
+
+<body>
+  <h3><a href="/"><i class='bx bx-arrow-back'></i></a>Quay về</h3>
+  <form action="/update_user/<%= userToUpdate._id %>" method="post">
+    Name: <input type="text" name="name" value="<%= userToUpdate.name %>">
+    <br>
+    Gender:
+    <select name="gender">
+      <% if (userToUpdate.gender === 'Male') { %>
+      <option value="Male" selected>Male</option>
+      <option value="Female">Female</option>
+      <% } else { %>
+      <option value="Male">Male</option>
+      <option value="Female" selected>Female</option>
+      <% } %>
+    </select> <br>
+    Age: <input type="number" name="age" value="<%= userToUpdate.age %>"> <br>
+    Email: <input type="email" name="email" value="<%= userToUpdate.email %>">
+    <br>
+    Phone: <input type="tel" name="phone" value="<%= userToUpdate.phone %>">
+    <br>
+    Address: <input type="text" name="address"
+      value="<%= userToUpdate.address %>"> <br>
+    <button type="submit">Update</button>
+  </form>
+</body>

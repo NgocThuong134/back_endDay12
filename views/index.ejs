@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>List Class</title>
+    <link rel='stylesheet' href />
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css'
+      rel='stylesheet'>
+    <style>
+      /* Reset CSS */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Body styles */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f5f5f5;
+  padding: 20px;
+}
+
+/* Heading styles */
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Table styles */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+table th,
+table td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+table th {
+  background-color: #f4f4f4;
+  font-weight: bold;
+}
+
+/* Action buttons styles */
+.action {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.action button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  color: #333;
+  transition: color 0.3s ease;
+}
+
+.action button:hover {
+  color: #666;
+}
+
+.edit {
+  color: #007bff;
+}
+
+.delete {
+  color: #dc3545;
+}
+
+/* Add user button styles */
+a {
+  text-decoration: none;
+  display: block;
+  text-align: right;
+  margin-bottom: 20px;
+}
+
+button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+    </style>
+  </head>
+  <body>
+    <h1>Danh sách người dùng</h1>
+    <a href="/add"><button>Thêm người dùng</button></a>
+    <table>
+      <tr>
+        <th>Tên</th>
+        <th>Giới tính</th>
+        <th>Tuổi</th>
+        <th>Email</th>
+        <th>Số điện thoại</th>
+        <th>Địa chỉ</th>
+        <th>Ngày tạo</th>
+        <th>Action</th>
+      </tr>
+      <% if (users && users.length > 0) { %>
+      <% users.forEach(user => { %>
+      <tr>
+        <td><%= user.name %></td>
+        <td><%= user.gender %></td>
+        <td><%= user.age %></td>
+        <td><%= user.email %></td>
+        <td><%= user.phone %></td>
+        <td><%= user.address %></td>
+        <td><%= user.createAt.toLocaleDateString() %></td>
+        <td class="action">
+          <a href="/update/<%= user.id %>"><button><i
+                class='bx bxs-edit edit'></i></button></a>
+          <a href="/delete/<%= user.id %>"><button><i
+                class='bx bxs-trash-alt delete'></i></button></a>
+        </td>
+      </tr>
+      <% }) %>
+      <% } else { %>
+      <tr>
+        <td colspan="8">Không có người dùng nào.</td>
+      </tr>
+      <% } %>
+    </table>
+  </body>
+</html>
